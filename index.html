@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Updated title and added theme toggle support -->
-  <title>Mohit Kumar - iOS Developer Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohit Kumar - iOS Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -12,37 +12,37 @@
       box-sizing: border-box;
     }
 
-    /* Added CSS custom properties for light/dark theme support */
+    /* Added iOS 16 liquid glass background system */
     :root {
       --bg-primary: #ffffff;
       --bg-secondary: #f8fafc;
-      --bg-card: rgba(255, 255, 255, 0.95);
+      --bg-card: rgba(255, 255, 255, 0.25);
       --text-primary: #1a1a1a;
       --text-secondary: #6b7280;
       --text-accent: #2563eb;
-      --border-color: rgba(0, 0, 0, 0.05);
+      --border-color: rgba(255, 255, 255, 0.2);
       --shadow-light: rgba(0, 0, 0, 0.1);
       --shadow-medium: rgba(0, 0, 0, 0.2);
-      --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --liquid-gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --liquid-gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --liquid-gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --liquid-gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      --liquid-gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
     }
 
     [data-theme="dark"] {
       --bg-primary: #0a0a0a;
       --bg-secondary: #111111;
-      --bg-card: rgba(20, 20, 20, 0.95);
+      --bg-card: rgba(20, 20, 20, 0.4);
       --text-primary: #ffffff;
       --text-secondary: #a1a1aa;
       --text-accent: #60a5fa;
       --border-color: rgba(255, 255, 255, 0.1);
       --shadow-light: rgba(0, 0, 0, 0.3);
       --shadow-medium: rgba(0, 0, 0, 0.5);
-      --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     }
 
+    /* iOS 16 liquid glass background animation system */
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       line-height: 1.6;
@@ -50,6 +50,99 @@
       background: var(--bg-primary);
       overflow-x: hidden;
       transition: all 0.3s ease;
+      position: relative;
+    }
+
+    /* Liquid glass background layers */
+    .liquid-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .liquid-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.7;
+      animation: liquidFlow 20s ease-in-out infinite;
+    }
+
+    .liquid-blob:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      background: var(--liquid-gradient-1);
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .liquid-blob:nth-child(2) {
+      width: 400px;
+      height: 400px;
+      background: var(--liquid-gradient-2);
+      top: 60%;
+      right: 10%;
+      animation-delay: 5s;
+    }
+
+    .liquid-blob:nth-child(3) {
+      width: 250px;
+      height: 250px;
+      background: var(--liquid-gradient-3);
+      bottom: 20%;
+      left: 30%;
+      animation-delay: 10s;
+    }
+
+    .liquid-blob:nth-child(4) {
+      width: 350px;
+      height: 350px;
+      background: var(--liquid-gradient-4);
+      top: 30%;
+      right: 30%;
+      animation-delay: 15s;
+    }
+
+    .liquid-blob:nth-child(5) {
+      width: 200px;
+      height: 200px;
+      background: var(--liquid-gradient-5);
+      bottom: 10%;
+      right: 20%;
+      animation-delay: 8s;
+    }
+
+    @keyframes liquidFlow {
+      0%, 100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+        border-radius: 50%;
+      }
+      25% {
+        transform: translate(100px, -50px) scale(1.1) rotate(90deg);
+        border-radius: 60% 40% 30% 70%;
+      }
+      50% {
+        transform: translate(-50px, 100px) scale(0.9) rotate(180deg);
+        border-radius: 30% 60% 70% 40%;
+      }
+      75% {
+        transform: translate(-100px, -100px) scale(1.2) rotate(270deg);
+        border-radius: 40% 30% 60% 70%;
+      }
+    }
+
+    /* Enhanced glassmorphism effects */
+    .glass-effect {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
 
     /* Added cursor trail styles */
@@ -66,14 +159,15 @@
       backdrop-filter: blur(2px);
     }
 
-    /* Header */
+    /* Enhanced header with liquid glass effect */
     header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       background: var(--bg-card);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(30px) saturate(200%);
+      -webkit-backdrop-filter: blur(30px) saturate(200%);
       border-bottom: 1px solid var(--border-color);
       padding: 1rem 2rem;
       display: flex;
@@ -99,7 +193,6 @@
       text-shadow: 2px 2px 10px rgba(37, 99, 235, 0.3);
     }
 
-    /* Added theme toggle button styles */
     .header-controls {
       display: flex;
       align-items: center;
@@ -108,6 +201,7 @@
 
     .theme-toggle {
       background: var(--bg-card);
+      backdrop-filter: blur(20px);
       border: 1px solid var(--border-color);
       border-radius: 50px;
       padding: 0.5rem;
@@ -162,7 +256,7 @@
       width: 100%;
     }
 
-    /* Enhanced hero section with personal profile content and advanced 3D effects */
+    /* Enhanced hero with liquid glass overlay */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -170,7 +264,7 @@
       justify-content: center;
       text-align: center;
       padding: 2rem;
-      background: var(--gradient-primary);
+      background: transparent;
       color: white;
       position: relative;
       overflow: hidden;
@@ -184,11 +278,11 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="1" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-      opacity: 0.3;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(1px);
+      z-index: 1;
     }
 
-    /* Added floating elements for enhanced 3D effect */
     .floating-elements {
       position: absolute;
       top: 0;
@@ -196,7 +290,7 @@
       right: 0;
       bottom: 0;
       pointer-events: none;
-      z-index: 1;
+      z-index: 2;
     }
 
     .floating-element {
@@ -238,7 +332,7 @@
 
     .hero-content {
       max-width: 800px;
-      z-index: 2;
+      z-index: 3;
       position: relative;
       transform-style: preserve-3d;
     }
@@ -247,7 +341,7 @@
       width: 150px;
       height: 150px;
       border-radius: 50%;
-      background: var(--gradient-secondary);
+      background: var(--liquid-gradient-2);
       margin: 0 auto 2rem;
       display: flex;
       align-items: center;
@@ -258,10 +352,18 @@
       animation: fadeInUp3D 1s ease forwards 0.2s;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
       transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
     }
 
     .profile-image:hover {
       transform: rotateY(10deg) rotateX(-5deg) translateZ(20px);
+    }
+
+    @keyframes fadeInUp3D {
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+      }
     }
 
     .hero h1 {
@@ -305,8 +407,9 @@
     .cta-button {
       display: inline-block;
       padding: 1rem 2rem;
-      background: white;
-      color: var(--text-accent);
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+      color: white;
       text-decoration: none;
       border-radius: 50px;
       font-weight: 600;
@@ -314,6 +417,7 @@
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       transform-style: preserve-3d;
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
     .cta-button.secondary {
@@ -325,13 +429,15 @@
     .cta-button:hover {
       transform: translateY(-5px) rotateX(5deg) translateZ(10px);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      background: rgba(255, 255, 255, 0.3);
     }
 
-    /* Sections */
+    /* Enhanced sections with glass effects */
     section {
       padding: 6rem 2rem;
       max-width: 1200px;
       margin: 0 auto;
+      position: relative;
     }
 
     .section-header {
@@ -359,7 +465,6 @@
       transition: all 0.8s ease 0.2s;
     }
 
-    /* Enhanced languages section with glassmorphism effects */
     .languages-section {
       background: var(--bg-secondary);
       padding: 6rem 2rem;
@@ -376,7 +481,8 @@
 
     .language-tile {
       background: var(--bg-card);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-radius: 20px;
       padding: 3rem 2rem;
       text-align: center;
@@ -397,7 +503,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: var(--gradient-accent);
+      background: var(--liquid-gradient-3);
       opacity: 0;
       transition: opacity 0.3s ease;
       z-index: -1;
@@ -416,7 +522,7 @@
       width: 80px;
       height: 80px;
       margin: 0 auto 1.5rem;
-      background: var(--gradient-primary);
+      background: var(--liquid-gradient-1);
       border-radius: 20px;
       display: flex;
       align-items: center;
@@ -468,7 +574,8 @@
 
     .project-card {
       background: var(--bg-card);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-radius: 15px;
       overflow: hidden;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -486,7 +593,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: var(--gradient-secondary);
+      background: var(--liquid-gradient-2);
       opacity: 0;
       transition: opacity 0.3s ease;
       z-index: -1;
@@ -504,7 +611,7 @@
     .project-image {
       width: 100%;
       height: 200px;
-      background: var(--gradient-primary);
+      background: var(--liquid-gradient-1);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -593,113 +700,69 @@
     }
 
     .skill-tag {
-      background: var(--gradient-accent);
+      background: var(--liquid-gradient-3);
       color: white;
       padding: 0.5rem 1rem;
       border-radius: 25px;
       font-size: 0.9rem;
       font-weight: 500;
-      transform: translateY(20px);
-      opacity: 0;
-      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    .skill-tag:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
-    }
-
-    /* Footer */
     footer {
       background: var(--bg-primary);
-      color: var(--text-primary);
-      text-align: center;
       padding: 3rem 2rem;
+      text-align: center;
+      color: var(--text-secondary);
       border-top: 1px solid var(--border-color);
     }
 
-    footer p {
-      font-size: 0.95rem;
-      opacity: 0.8;
-    }
-
-    /* Updated animations with 3D effects */
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInUp3D {
-      to {
-        opacity: 1;
-        transform: translateY(0) translateZ(0);
-      }
-    }
-
-    .show {
-      opacity: 1 !important;
-      transform: translateY(0) scale(1) translateZ(0) !important;
-    }
-
-    /* Mobile Responsiveness */
+    /* Responsive design improvements */
     @media (max-width: 768px) {
-      header {
-        padding: 1rem;
-      }
-
       .header-controls {
         gap: 1rem;
       }
-
+      
       nav {
         gap: 1rem;
       }
-
-      nav a {
-        font-size: 0.9rem;
-      }
-
+      
       .hero {
         padding: 1rem;
       }
-
+      
       .cta-buttons {
         flex-direction: column;
         align-items: center;
       }
-
-      section {
-        padding: 4rem 1rem;
-      }
-
+      
       .languages-grid,
       .projects-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
       }
+    }
 
-      .language-tile {
-        padding: 2rem;
-      }
-
-      .language-tile:hover,
-      .project-card:hover {
-        transform: translateY(-5px);
-      }
-
-      .about-content {
-        grid-template-columns: 1fr;
-      }
+    /* Animation visibility classes */
+    .visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
     }
   </style>
 </head>
 <body>
-  <!-- Added cursor trail element -->
+  <!-- Added liquid glass background system -->
+  <div class="liquid-background">
+    <div class="liquid-blob"></div>
+    <div class="liquid-blob"></div>
+    <div class="liquid-blob"></div>
+    <div class="liquid-blob"></div>
+    <div class="liquid-blob"></div>
+  </div>
+
   <div class="cursor-trail"></div>
 
-  <header>
+  <header class="glass-effect">
     <a href="#" class="logo">Mohit Kumar</a>
     <div class="header-controls">
       <nav>
@@ -709,14 +772,12 @@
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
       </nav>
-      <!-- Added theme toggle button -->
-      <button class="theme-toggle" id="themeToggle">
+      <button class="theme-toggle glass-effect" id="themeToggle">
         <span id="themeIcon">🌙</span>
       </button>
     </div>
   </header>
 
-  <!-- Enhanced hero section with personal profile content -->
   <section id="home" class="hero">
     <div class="floating-elements">
       <div class="floating-element"></div>
@@ -735,7 +796,6 @@
     </div>
   </section>
 
-  <!-- Updated languages section with iOS development focus -->
   <section id="languages" class="languages-section">
     <div class="section-header">
       <h2>Core Technologies</h2>
@@ -743,19 +803,19 @@
     </div>
     
     <div class="languages-grid">
-      <div class="language-tile">
+      <div class="language-tile glass-effect">
         <div class="language-icon">🔧</div>
         <h3>Objective-C</h3>
         <p>Deep expertise in Objective-C for robust iOS applications with legacy system integration and performance optimization. Experienced in memory management and runtime dynamics.</p>
       </div>
       
-      <div class="language-tile">
+      <div class="language-tile glass-effect">
         <div class="language-icon">⚡</div>
         <h3>Swift</h3>
         <p>Modern Swift development for high-performance iOS apps with clean, maintainable code. Proficient in advanced language features, protocols, and functional programming patterns.</p>
       </div>
       
-      <div class="language-tile">
+      <div class="language-tile glass-effect">
         <div class="language-icon">🎨</div>
         <h3>SwiftUI</h3>
         <p>Declarative UI development with SwiftUI for beautiful, responsive interfaces. Expert in state management, animations, and creating seamless user experiences across all Apple platforms.</p>
@@ -763,7 +823,6 @@
     </div>
   </section>
 
-  <!-- Added about section with personal information -->
   <section id="about" class="about-section">
     <div class="section-header">
       <h2>About Me</h2>
@@ -793,7 +852,6 @@
     </div>
   </section>
 
-  <!-- Enhanced projects section with iOS-focused projects -->
   <section id="projects" class="projects-section">
     <div class="section-header">
       <h2>Featured Projects</h2>
@@ -801,7 +859,7 @@
     </div>
     
     <div class="projects-grid">
-      <div class="project-card">
+      <div class="project-card glass-effect">
         <div class="project-image">📱</div>
         <div class="project-content">
           <h4>Joby</h4>
@@ -809,7 +867,7 @@
         </div>
       </div>
       
-      <div class="project-card">
+      <div class="project-card glass-effect">
         <div class="project-image">🏥</div>
         <div class="project-content">
           <h4>Naira Me</h4>
@@ -817,7 +875,7 @@
         </div>
       </div>
       
-      <div class="project-card">
+      <div class="project-card glass-effect">
         <div class="project-image">🛒</div>
         <div class="project-content">
           <h4>Food delivery</h4>
@@ -825,7 +883,7 @@
         </div>
       </div>
       
-      <div class="project-card">
+      <div class="project-card glass-effect">
         <div class="project-image">🎓</div>
         <div class="project-content">
           <h4>EduLearn Platform</h4>
@@ -833,7 +891,7 @@
         </div>
       </div>
       
-      <div class="project-card">
+      <div class="project-card glass-effect">
         <div class="project-image">🚗</div>
         <div class="project-content">
           <h4>RideShare Connect</h4>
@@ -841,7 +899,7 @@
         </div>
       </div>
       
-      <div class="project-card">
+      <div class="project-card glass-effect">
         <div class="project-image">🏠</div>
         <div class="project-content">
           <h4>CalivariaUnoTV app</h4>
@@ -849,7 +907,7 @@
         </div>
       </div>
       
-      <div class="project-card">
+      <div class="project-card glass-effect">
         <div class="project-image">💼</div>
         <div class="project-content">
           <h4>TaskMaster Pro</h4>
@@ -857,7 +915,7 @@
         </div>
       </div>
       
-      <div class="project-card">
+      <div class="project-card glass-effect">
         <div class="project-image">🎵</div>
         <div class="project-content">
           <h4>MusicStream Plus</h4>
@@ -865,7 +923,7 @@
         </div>
       </div>
       
-      <div class="project-card">
+      <div class="project-card glass-effect">
         <div class="project-image">📸</div>
         <div class="project-content">
           <h4>PhotoEdit Studio</h4>
@@ -873,7 +931,7 @@
         </div>
       </div>
       
-      <div class="project-card">
+      <div class="project-card glass-effect">
         <div class="project-image">🍕</div>
         <div class="project-content">
           <h4>FoodDelivery Express</h4>
@@ -881,169 +939,130 @@
         </div>
       </div>
       
-      <div class="project-card">
+      <div class="project-card glass-effect">
         <div class="project-image">🔒</div>
         <div class="project-content">
           <h4>PowerHouse</h4>
-          <p>Locate the nearest power-bank station on the map, scan the station’s QR code to unlock, and start your rental in seconds—no lines, no hassle</p>
+          <p>Locate the nearest power-bank station on the map, scan the station's QR code to unlock, and start your rental in seconds—no lines, no hassle</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer id="contact">
     <p>&copy; 2025 Mohit Kumar. Crafting exceptional iOS experiences with passion and precision.</p>
   </footer>
 
   <script>
-    
-    // Cursor trail effect
-    const cursorTrail = document.querySelector('.cursor-trail');
-    let mouseX = 0, mouseY = 0;
-    let trailX = 0, trailY = 0;
+    document.addEventListener('DOMContentLoaded', function() {
+      // Cursor trail effect
+      const cursorTrail = document.querySelector('.cursor-trail');
+      let mouseX = 0, mouseY = 0;
+      let trailX = 0, trailY = 0;
 
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    function animateCursor() {
-      const diffX = mouseX - trailX;
-      const diffY = mouseY - trailY;
-      
-      trailX += diffX * 0.1;
-      trailY += diffY * 0.1;
-      
-      cursorTrail.style.left = trailX + 'px';
-      cursorTrail.style.top = trailY + 'px';
-      
-      requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    // Theme toggle functionality
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const body = document.body;
-
-    // Check for saved theme preference or default to light mode
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    body.setAttribute('data-theme', currentTheme);
-    themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = body.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      
-      body.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-    });
-
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
       });
-    });
 
-    // Enhanced intersection observer for scroll animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
-      });
-    }, observerOptions);
-
-    const animatedElements = document.querySelectorAll('.section-header h2, .section-header p, .language-tile, .project-card, .about-text, .skill-tag');
-    animatedElements.forEach(el => observer.observe(el));
-
-    // Header background on scroll
-    window.addEventListener('scroll', () => {
-      const header = document.querySelector('header');
-      if (window.scrollY > 100) {
-        header.style.background = 'var(--bg-card)';
-        header.style.boxShadow = '0 2px 20px var(--shadow-light)';
-      } else {
-        header.style.background = 'var(--bg-card)';
-        header.style.boxShadow = 'none';
+      function animateTrail() {
+        trailX += (mouseX - trailX) * 0.1;
+        trailY += (mouseY - trailY) * 0.1;
+        
+        cursorTrail.style.left = trailX + 'px';
+        cursorTrail.style.top = trailY + 'px';
+        
+        requestAnimationFrame(animateTrail);
       }
-    });
+      animateTrail();
 
-    // Staggered animations
-    const languageTiles = document.querySelectorAll('.language-tile');
-    languageTiles.forEach((tile, index) => {
-      tile.style.transitionDelay = `${index * 0.15}s`;
-    });
-
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach((card, index) => {
-      card.style.transitionDelay = `${index * 0.1}s`;
-    });
-
-    const skillTags = document.querySelectorAll('.skill-tag');
-    skillTags.forEach((tag, index) => {
-      tag.style.transitionDelay = `${index * 0.1}s`;
-    });
-
-    // Enhanced hero 3D mouse tracking
-    const hero = document.querySelector('.hero');
-    const heroContent = document.querySelector('.hero-content');
-
-    hero.addEventListener('mousemove', (e) => {
-      const rect = hero.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
+      // Theme toggle
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = document.getElementById('themeIcon');
       
-      const rotateX = (y - 0.5) * 10;
-      const rotateY = (x - 0.5) * -10;
-      
-      heroContent.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    });
-
-    hero.addEventListener('mouseleave', () => {
-      heroContent.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-    });
-
-    // Parallax effect for floating elements
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const floatingElements = document.querySelectorAll('.floating-element');
-      
-      floatingElements.forEach((element, index) => {
-        const speed = 0.5 + (index * 0.2);
-        element.style.transform = `translateY(${scrolled * speed}px) rotateZ(${scrolled * 0.1}deg)`;
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        
+        localStorage.setItem('theme', newTheme);
       });
-    });
 
-    // Add hover effects to interactive elements
-    document.querySelectorAll('.language-tile, .project-card').forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        cursorTrail.style.transform = 'scale(1.5)';
-        cursorTrail.style.background = 'radial-gradient(circle, rgba(102, 126, 234, 1) 0%, rgba(118, 75, 162, 0.6) 50%, transparent 70%)';
-      });
+      // Load saved theme
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements for animation
+      const animatedElements = document.querySelectorAll('.section-header h2, .section-header p, .language-tile, .project-card, .about-text');
+      animatedElements.forEach(el => observer.observe(el));
+
+      const liquidBlobs = document.querySelectorAll('.liquid-blob');
       
-      card.addEventListener('mouseleave', () => {
-        cursorTrail.style.transform = 'scale(1)';
-        cursorTrail.style.background = 'radial-gradient(circle, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.4) 50%, transparent 70%)';
+      document.addEventListener('mousemove', (e) => {
+        const mouseXPercent = (e.clientX / window.innerWidth) * 100;
+        const mouseYPercent = (e.clientY / window.innerHeight) * 100;
+        
+        liquidBlobs.forEach((blob, index) => {
+          const speed = (index + 1) * 0.5;
+          const offsetX = (mouseXPercent - 50) * speed;
+          const offsetY = (mouseYPercent - 50) * speed;
+          
+          blob.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        });
       });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      function cycleLiquidColors() {
+        const gradients = [
+          'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+          'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+          'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+          'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+          'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+          'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)'
+        ];
+        
+        liquidBlobs.forEach((blob, index) => {
+          setInterval(() => {
+            const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
+            blob.style.background = randomGradient;
+          }, 8000 + (index * 2000));
+        });
+      }
+      
+      cycleLiquidColors();
     });
   </script>
-
 </body>
 </html>
-
