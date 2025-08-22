@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Innovate Pro - Professional Solutions</title>
+  <!-- Updated title and added theme toggle support -->
+  <title>Alex Johnson - iOS Developer Portfolio</title>
   <style>
     * {
       margin: 0;
@@ -11,12 +12,58 @@
       box-sizing: border-box;
     }
 
+    /* Added CSS custom properties for light/dark theme support */
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b7280;
+      --text-accent: #2563eb;
+      --border-color: rgba(0, 0, 0, 0.05);
+      --shadow-light: rgba(0, 0, 0, 0.1);
+      --shadow-medium: rgba(0, 0, 0, 0.2);
+      --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #111111;
+      --bg-card: rgba(20, 20, 20, 0.95);
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
+      --text-accent: #60a5fa;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --shadow-light: rgba(0, 0, 0, 0.3);
+      --shadow-medium: rgba(0, 0, 0, 0.5);
+      --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       line-height: 1.6;
-      color: #1a1a1a;
-      background: #ffffff;
+      color: var(--text-primary);
+      background: var(--bg-primary);
       overflow-x: hidden;
+      transition: all 0.3s ease;
+    }
+
+    /* Added cursor trail styles */
+    .cursor-trail {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.4) 50%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: all 0.1s ease;
+      backdrop-filter: blur(2px);
     }
 
     /* Header */
@@ -25,9 +72,9 @@
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(255, 255, 255, 0.95);
+      background: var(--bg-card);
       backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid var(--border-color);
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
@@ -41,7 +88,7 @@
     .logo {
       font-size: 1.5rem;
       font-weight: 700;
-      color: #2563eb;
+      color: var(--text-accent);
       text-decoration: none;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       transform-style: preserve-3d;
@@ -52,6 +99,33 @@
       text-shadow: 2px 2px 10px rgba(37, 99, 235, 0.3);
     }
 
+    /* Added theme toggle button styles */
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .theme-toggle {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      padding: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      transform-style: preserve-3d;
+    }
+
+    .theme-toggle:hover {
+      transform: rotateY(15deg) translateZ(5px);
+      box-shadow: 0 5px 15px var(--shadow-light);
+    }
+
     nav {
       display: flex;
       gap: 2rem;
@@ -59,7 +133,7 @@
 
     nav a {
       text-decoration: none;
-      color: #4b5563;
+      color: var(--text-secondary);
       font-weight: 500;
       font-size: 0.95rem;
       transition: all 0.3s ease;
@@ -68,7 +142,7 @@
     }
 
     nav a:hover {
-      color: #2563eb;
+      color: var(--text-accent);
       transform: translateY(-2px) translateZ(5px);
       text-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
     }
@@ -80,7 +154,7 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: #2563eb;
+      background: var(--text-accent);
       transition: width 0.3s ease;
     }
 
@@ -88,7 +162,7 @@
       width: 100%;
     }
 
-    /* Hero Section */
+    /* Enhanced hero section with personal profile content and advanced 3D effects */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -96,7 +170,7 @@
       justify-content: center;
       text-align: center;
       padding: 2rem;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: var(--gradient-primary);
       color: white;
       position: relative;
       overflow: hidden;
@@ -114,6 +188,54 @@
       opacity: 0.3;
     }
 
+    /* Added floating elements for enhanced 3D effect */
+    .floating-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .floating-element {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      backdrop-filter: blur(10px);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-element:nth-child(1) {
+      width: 80px;
+      height: 80px;
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .floating-element:nth-child(2) {
+      width: 120px;
+      height: 120px;
+      top: 60%;
+      right: 15%;
+      animation-delay: 2s;
+    }
+
+    .floating-element:nth-child(3) {
+      width: 60px;
+      height: 60px;
+      bottom: 30%;
+      left: 20%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotateZ(0deg); }
+      50% { transform: translateY(-20px) rotateZ(180deg); }
+    }
+
     .hero-content {
       max-width: 800px;
       z-index: 2;
@@ -121,39 +243,83 @@
       transform-style: preserve-3d;
     }
 
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: var(--gradient-secondary);
+      margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      opacity: 0;
+      transform: translateY(50px) rotateX(20deg);
+      animation: fadeInUp3D 1s ease forwards 0.2s;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .profile-image:hover {
+      transform: rotateY(10deg) rotateX(-5deg) translateZ(20px);
+    }
+
     .hero h1 {
       font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 800;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       opacity: 0;
       transform: translateY(50px);
-      animation: fadeInUp3D 1s ease forwards 0.3s;
+      animation: fadeInUp3D 1s ease forwards 0.4s;
+    }
+
+    .hero .subtitle {
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp3D 1s ease forwards 0.6s;
+      color: rgba(255, 255, 255, 0.9);
     }
 
     .hero p {
       font-size: 1.25rem;
       margin-bottom: 2rem;
-      opacity: 0.9;
       opacity: 0;
       transform: translateY(30px);
-      animation: fadeInUp3D 1s ease forwards 0.6s;
+      animation: fadeInUp3D 1s ease forwards 0.8s;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp3D 1s ease forwards 1s;
     }
 
     .cta-button {
       display: inline-block;
       padding: 1rem 2rem;
       background: white;
-      color: #2563eb;
+      color: var(--text-accent);
       text-decoration: none;
       border-radius: 50px;
       font-weight: 600;
       font-size: 1.1rem;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp3D 1s ease forwards 0.9s;
       transform-style: preserve-3d;
+    }
+
+    .cta-button.secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.3);
     }
 
     .cta-button:hover {
@@ -176,7 +342,7 @@
     .section-header h2 {
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 700;
-      color: #1a1a1a;
+      color: var(--text-primary);
       margin-bottom: 1rem;
       opacity: 0;
       transform: translateY(30px);
@@ -185,7 +351,7 @@
 
     .section-header p {
       font-size: 1.2rem;
-      color: #6b7280;
+      color: var(--text-secondary);
       max-width: 600px;
       margin: 0 auto;
       opacity: 0;
@@ -193,10 +359,11 @@
       transition: all 0.8s ease 0.2s;
     }
 
-    /* Languages Section Styles */
+    /* Enhanced languages section with glassmorphism effects */
     .languages-section {
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      background: var(--bg-secondary);
       padding: 6rem 2rem;
+      position: relative;
     }
 
     .languages-grid {
@@ -208,28 +375,48 @@
     }
 
     .language-tile {
-      background: white;
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
       border-radius: 20px;
       padding: 3rem 2rem;
       text-align: center;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 15px 40px var(--shadow-light);
+      border: 1px solid var(--border-color);
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       opacity: 0;
       transform: translateY(30px) rotateX(10deg);
       transform-style: preserve-3d;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .language-tile::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-accent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .language-tile:hover::before {
+      opacity: 0.1;
     }
 
     .language-tile:hover {
       transform: translateY(-15px) rotateX(-5deg) rotateY(5deg) translateZ(20px);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 25px 60px var(--shadow-medium);
     }
 
     .language-icon {
       width: 80px;
       height: 80px;
       margin: 0 auto 1.5rem;
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      background: var(--gradient-primary);
       border-radius: 20px;
       display: flex;
       align-items: center;
@@ -238,34 +425,37 @@
       color: white;
       transform: translateZ(10px);
       transition: all 0.3s ease;
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: translateZ(10px) rotateY(0deg); }
+      to { transform: translateZ(10px) rotateY(360deg); }
     }
 
     .language-tile:hover .language-icon {
-      transform: translateZ(20px) rotateY(10deg);
+      transform: translateZ(20px) rotateY(10deg) scale(1.1);
+      animation-play-state: paused;
     }
 
     .language-tile h3 {
       font-size: 1.5rem;
       font-weight: 600;
       margin-bottom: 1rem;
-      color: #1a1a1a;
+      color: var(--text-primary);
     }
 
     .language-tile p {
-      color: #6b7280;
+      color: var(--text-secondary);
       line-height: 1.6;
     }
 
-    /* Projects Section Styles */
+    /* Enhanced projects section with dark theme and advanced animations */
     .projects-section {
-      background: #1a1a1a;
-      color: white;
+      background: var(--bg-primary);
+      color: var(--text-primary);
       padding: 6rem 2rem;
-    }
-
-    .projects-section .section-header h2,
-    .projects-section .section-header p {
-      color: white;
+      position: relative;
     }
 
     .projects-grid {
@@ -277,32 +467,68 @@
     }
 
     .project-card {
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
       border-radius: 15px;
       overflow: hidden;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       opacity: 0;
       transform: translateY(40px) rotateX(15deg);
       transform-style: preserve-3d;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-secondary);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .project-card:hover::before {
+      opacity: 0.05;
     }
 
     .project-card:hover {
       transform: translateY(-10px) rotateX(-2deg) rotateY(3deg) translateZ(15px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 20px 50px var(--shadow-medium);
     }
 
     .project-image {
       width: 100%;
       height: 200px;
-      background: linear-gradient(45deg, #667eea, #764ba2);
+      background: var(--gradient-primary);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 3rem;
       transition: all 0.3s ease;
       transform: translateZ(5px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .project-card:hover .project-image::before {
+      transform: translateX(100%);
     }
 
     .project-card:hover .project-image {
@@ -317,116 +543,79 @@
       font-size: 1.1rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
-      color: white;
+      color: var(--text-primary);
     }
 
     .project-content p {
       font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.7);
+      color: var(--text-secondary);
       line-height: 1.5;
     }
 
-    /* Feature Cards */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
-      perspective: 1000px;
+    /* Enhanced about section with personal information */
+    .about-section {
+      background: var(--bg-secondary);
+      padding: 6rem 2rem;
     }
 
-    .feature-card {
-      background: white;
-      border-radius: 20px;
-      padding: 2.5rem;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      opacity: 0;
-      transform: translateY(30px);
-      transform-style: preserve-3d;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-15px) rotateX(-5deg) rotateY(5deg) translateZ(20px);
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
-    }
-
-    .feature-icon {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
-      transform: translateZ(10px);
-      transition: all 0.3s ease;
-    }
-
-    .feature-card:hover .feature-icon {
-      transform: translateZ(20px) rotateY(10deg);
-    }
-
-    .feature-card h3 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: #1a1a1a;
-    }
-
-    .feature-card p {
-      color: #6b7280;
-      line-height: 1.7;
-    }
-
-    /* Gallery Section */
-    .gallery {
-      background: #f8fafc;
-    }
-
-    .gallery-grid {
+    .about-content {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
-      perspective: 1000px;
+      gap: 3rem;
+      align-items: center;
     }
 
-    .gallery-item {
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    .about-text {
       opacity: 0;
-      transform: scale(0.95);
-      transform-style: preserve-3d;
+      transform: translateX(-30px);
+      transition: all 0.8s ease;
     }
 
-    .gallery-item:hover {
-      transform: scale(1.02) rotateX(-2deg) rotateY(2deg) translateZ(15px);
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+    .about-text h3 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
     }
 
-    .gallery-item img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
+    .about-text p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .skill-tag {
+      background: var(--gradient-accent);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transform: translateY(20px);
+      opacity: 0;
       transition: all 0.3s ease;
     }
 
-    .gallery-item:hover img {
-      transform: scale(1.1) translateZ(5px);
+    .skill-tag:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
     }
 
     /* Footer */
     footer {
-      background: #1a1a1a;
-      color: white;
+      background: var(--bg-primary);
+      color: var(--text-primary);
       text-align: center;
       padding: 3rem 2rem;
+      border-top: 1px solid var(--border-color);
     }
 
     footer p {
@@ -460,6 +649,10 @@
         padding: 1rem;
       }
 
+      .header-controls {
+        gap: 1rem;
+      }
+
       nav {
         gap: 1rem;
       }
@@ -472,56 +665,77 @@
         padding: 1rem;
       }
 
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
       section {
         padding: 4rem 1rem;
       }
 
-      .features-grid,
-      .gallery-grid,
       .languages-grid,
       .projects-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
       }
 
-      .feature-card,
       .language-tile {
         padding: 2rem;
       }
 
-      .feature-card:hover,
       .language-tile:hover,
-      .project-card:hover,
-      .gallery-item:hover {
+      .project-card:hover {
         transform: translateY(-5px);
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
+  <!-- Added cursor trail element -->
+  <div class="cursor-trail"></div>
 
   <header>
-    <a href="#" class="logo">Innovate Pro</a>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#languages">Languages</a>
-      <a href="#features">Features</a>
-      <a href="#projects">Projects</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <a href="#" class="logo">Alex Johnson</a>
+    <div class="header-controls">
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#languages">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <!-- Added theme toggle button -->
+      <button class="theme-toggle" id="themeToggle">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Enhanced hero section with personal profile content -->
   <section id="home" class="hero">
+    <div class="floating-elements">
+      <div class="floating-element"></div>
+      <div class="floating-element"></div>
+      <div class="floating-element"></div>
+    </div>
     <div class="hero-content">
-      <h1>Transform Your Business with Innovation</h1>
-      <p>Cutting-edge solutions designed to elevate your company to new heights of success and efficiency.</p>
-      <a href="#features" class="cta-button">Discover More</a>
+      <div class="profile-image">👨‍💻</div>
+      <h1>Alex Johnson</h1>
+      <div class="subtitle">iOS Developer & Mobile App Architect</div>
+      <p>Crafting exceptional mobile experiences with Swift, SwiftUI, and Objective-C. Passionate about creating intuitive, performant apps that users love.</p>
+      <div class="cta-buttons">
+        <a href="#projects" class="cta-button">View My Work</a>
+        <a href="#contact" class="cta-button secondary">Get In Touch</a>
+      </div>
     </div>
   </section>
 
-  <!-- Languages Section -->
+  <!-- Updated languages section with iOS development focus -->
   <section id="languages" class="languages-section">
     <div class="section-header">
       <h2>Core Technologies</h2>
@@ -532,56 +746,58 @@
       <div class="language-tile">
         <div class="language-icon">🔧</div>
         <h3>Objective-C</h3>
-        <p>Deep expertise in Objective-C for robust iOS applications with legacy system integration and performance optimization.</p>
+        <p>Deep expertise in Objective-C for robust iOS applications with legacy system integration and performance optimization. Experienced in memory management and runtime dynamics.</p>
       </div>
       
       <div class="language-tile">
         <div class="language-icon">⚡</div>
         <h3>Swift</h3>
-        <p>Modern Swift development for high-performance iOS apps with clean, maintainable code and advanced language features.</p>
+        <p>Modern Swift development for high-performance iOS apps with clean, maintainable code. Proficient in advanced language features, protocols, and functional programming patterns.</p>
       </div>
       
       <div class="language-tile">
         <div class="language-icon">🎨</div>
         <h3>SwiftUI</h3>
-        <p>Declarative UI development with SwiftUI for beautiful, responsive interfaces and seamless user experiences.</p>
+        <p>Declarative UI development with SwiftUI for beautiful, responsive interfaces. Expert in state management, animations, and creating seamless user experiences across all Apple platforms.</p>
       </div>
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section id="features">
+  <!-- Added about section with personal information -->
+  <section id="about" class="about-section">
     <div class="section-header">
-      <h2>Why Choose Innovate Pro</h2>
-      <p>We deliver exceptional results through innovative technology and unparalleled expertise</p>
+      <h2>About Me</h2>
+      <p>Passionate iOS developer with 8+ years of experience creating innovative mobile solutions</p>
     </div>
     
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🚀</div>
-        <h3>Lightning Fast Performance</h3>
-        <p>Experience blazing-fast load times and seamless interactions that keep your users engaged and satisfied.</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">🛡️</div>
-        <h3>Enterprise Security</h3>
-        <p>Bank-level security protocols ensure your data remains protected with advanced encryption and monitoring.</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>Advanced Analytics</h3>
-        <p>Gain deep insights into your business performance with comprehensive analytics and reporting tools.</p>
+    <div class="about-content">
+      <div class="about-text">
+        <h3>My Journey</h3>
+        <p>I'm a dedicated iOS developer with a passion for creating exceptional mobile experiences. With over 8 years in the industry, I've worked on everything from startup MVPs to enterprise-scale applications used by millions of users.</p>
+        <p>My expertise spans the entire iOS ecosystem, from Objective-C legacy systems to cutting-edge SwiftUI interfaces. I believe in writing clean, maintainable code and staying current with the latest Apple technologies and best practices.</p>
+        <p>When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or mentoring aspiring developers in the iOS community.</p>
+        
+        <div class="skills-list">
+          <span class="skill-tag">iOS Development</span>
+          <span class="skill-tag">Swift</span>
+          <span class="skill-tag">SwiftUI</span>
+          <span class="skill-tag">Objective-C</span>
+          <span class="skill-tag">UIKit</span>
+          <span class="skill-tag">Core Data</span>
+          <span class="skill-tag">Combine</span>
+          <span class="skill-tag">MVVM</span>
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">Git</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Projects Section -->
+  <!-- Enhanced projects section with iOS-focused projects -->
   <section id="projects" class="projects-section">
     <div class="section-header">
-      <h2>Completed Projects</h2>
-      <p>Over 20 successful projects delivered with excellence and innovation</p>
+      <h2>Featured Projects</h2>
+      <p>A showcase of my recent iOS applications and mobile solutions</p>
     </div>
     
     <div class="projects-grid">
@@ -589,7 +805,7 @@
         <div class="project-image">📱</div>
         <div class="project-content">
           <h4>FinanceTracker Pro</h4>
-          <p>iOS app for personal finance management with AI-powered insights</p>
+          <p>SwiftUI-based personal finance app with Core Data integration and advanced analytics dashboard</p>
         </div>
       </div>
       
@@ -597,7 +813,7 @@
         <div class="project-image">🏥</div>
         <div class="project-content">
           <h4>HealthCare Connect</h4>
-          <p>Telemedicine platform connecting patients with healthcare providers</p>
+          <p>Telemedicine iOS app with video calling, appointment scheduling, and secure patient data management</p>
         </div>
       </div>
       
@@ -605,7 +821,7 @@
         <div class="project-image">🛒</div>
         <div class="project-content">
           <h4>ShopSmart Mobile</h4>
-          <p>E-commerce app with AR product visualization and smart recommendations</p>
+          <p>E-commerce app with ARKit product visualization, Core ML recommendations, and seamless checkout</p>
         </div>
       </div>
       
@@ -613,7 +829,7 @@
         <div class="project-image">🎓</div>
         <div class="project-content">
           <h4>EduLearn Platform</h4>
-          <p>Interactive learning management system for educational institutions</p>
+          <p>Interactive learning iOS app with offline content, progress tracking, and gamification features</p>
         </div>
       </div>
       
@@ -621,7 +837,7 @@
         <div class="project-image">🚗</div>
         <div class="project-content">
           <h4>RideShare Connect</h4>
-          <p>Real-time ride sharing app with advanced matching algorithms</p>
+          <p>Real-time ride sharing app with MapKit integration, push notifications, and payment processing</p>
         </div>
       </div>
       
@@ -629,7 +845,7 @@
         <div class="project-image">🏠</div>
         <div class="project-content">
           <h4>SmartHome Hub</h4>
-          <p>IoT home automation control system with voice integration</p>
+          <p>HomeKit-enabled iOS app for IoT device control with Siri integration and automation workflows</p>
         </div>
       </div>
       
@@ -637,7 +853,7 @@
         <div class="project-image">💼</div>
         <div class="project-content">
           <h4>TaskMaster Pro</h4>
-          <p>Enterprise project management tool with team collaboration features</p>
+          <p>Enterprise project management iOS app with team collaboration, file sharing, and offline sync</p>
         </div>
       </div>
       
@@ -645,7 +861,7 @@
         <div class="project-image">🎵</div>
         <div class="project-content">
           <h4>MusicStream Plus</h4>
-          <p>High-quality music streaming app with personalized playlists</p>
+          <p>High-quality music streaming app with AVAudioEngine, custom equalizer, and social features</p>
         </div>
       </div>
       
@@ -653,7 +869,7 @@
         <div class="project-image">📸</div>
         <div class="project-content">
           <h4>PhotoEdit Studio</h4>
-          <p>Professional photo editing app with AI-powered enhancement tools</p>
+          <p>Professional photo editing app with Core Image filters, custom drawing tools, and cloud sync</p>
         </div>
       </div>
       
@@ -661,7 +877,7 @@
         <div class="project-image">🍕</div>
         <div class="project-content">
           <h4>FoodDelivery Express</h4>
-          <p>On-demand food delivery platform with real-time tracking</p>
+          <p>On-demand food delivery app with real-time tracking, payment integration, and restaurant management</p>
         </div>
       </div>
       
@@ -669,7 +885,7 @@
         <div class="project-image">💪</div>
         <div class="project-content">
           <h4>FitTracker Elite</h4>
-          <p>Comprehensive fitness tracking app with workout planning</p>
+          <p>Comprehensive fitness app with HealthKit integration, workout planning, and social challenges</p>
         </div>
       </div>
       
@@ -677,7 +893,7 @@
         <div class="project-image">🌤️</div>
         <div class="project-content">
           <h4>WeatherWise Pro</h4>
-          <p>Advanced weather forecasting app with hyperlocal predictions</p>
+          <p>Advanced weather app with CoreLocation, custom animations, and hyperlocal forecasting</p>
         </div>
       </div>
       
@@ -685,7 +901,7 @@
         <div class="project-image">💰</div>
         <div class="project-content">
           <h4>CryptoTrader Hub</h4>
-          <p>Cryptocurrency trading platform with real-time market analysis</p>
+          <p>Cryptocurrency trading app with real-time data, advanced charts, and secure wallet integration</p>
         </div>
       </div>
       
@@ -693,7 +909,7 @@
         <div class="project-image">📚</div>
         <div class="project-content">
           <h4>BookReader Digital</h4>
-          <p>E-book reader with advanced annotation and sharing features</p>
+          <p>E-book reader with custom text rendering, annotation tools, and iCloud document sync</p>
         </div>
       </div>
       
@@ -701,7 +917,7 @@
         <div class="project-image">🎮</div>
         <div class="project-content">
           <h4>GameCenter Social</h4>
-          <p>Social gaming platform with multiplayer tournament system</p>
+          <p>Social gaming platform with Game Center integration, leaderboards, and multiplayer support</p>
         </div>
       </div>
       
@@ -709,7 +925,7 @@
         <div class="project-image">🏦</div>
         <div class="project-content">
           <h4>BankSecure Mobile</h4>
-          <p>Secure mobile banking app with biometric authentication</p>
+          <p>Secure banking app with Touch ID/Face ID authentication, transaction history, and bill pay</p>
         </div>
       </div>
       
@@ -717,7 +933,7 @@
         <div class="project-image">🚀</div>
         <div class="project-content">
           <h4>StartupLaunch Kit</h4>
-          <p>Business management suite for startup companies and entrepreneurs</p>
+          <p>Business management suite with analytics dashboard, team communication, and project tracking</p>
         </div>
       </div>
       
@@ -725,7 +941,7 @@
         <div class="project-image">🎨</div>
         <div class="project-content">
           <h4>DesignStudio Pro</h4>
-          <p>Creative design tool with collaborative workspace features</p>
+          <p>Creative design tool with Apple Pencil support, layer management, and collaborative features</p>
         </div>
       </div>
       
@@ -733,7 +949,7 @@
         <div class="project-image">📱</div>
         <div class="project-content">
           <h4>SocialConnect Plus</h4>
-          <p>Next-generation social networking app with privacy focus</p>
+          <p>Privacy-focused social networking app with end-to-end encryption and content moderation</p>
         </div>
       </div>
       
@@ -741,7 +957,7 @@
         <div class="project-image">🛍️</div>
         <div class="project-content">
           <h4>MarketPlace Elite</h4>
-          <p>B2B marketplace platform with advanced vendor management</p>
+          <p>B2B marketplace with vendor management, inventory tracking, and integrated payment processing</p>
         </div>
       </div>
       
@@ -749,7 +965,7 @@
         <div class="project-image">📊</div>
         <div class="project-content">
           <h4>Analytics Dashboard</h4>
-          <p>Business intelligence platform with real-time data visualization</p>
+          <p>Business intelligence app with interactive charts, data visualization, and custom reporting</p>
         </div>
       </div>
       
@@ -757,38 +973,62 @@
         <div class="project-image">🔒</div>
         <div class="project-content">
           <h4>SecureVault Pro</h4>
-          <p>Enterprise-grade password manager with team sharing capabilities</p>
+          <p>Enterprise password manager with biometric authentication, team sharing, and audit logs</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Gallery Section -->
-  <section id="gallery" class="gallery">
-    <div class="section-header">
-      <h2>Our Work in Action</h2>
-      <p>See how we've helped businesses transform their digital presence and achieve remarkable results</p>
-    </div>
-    
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img src="/placeholder.svg?height=250&width=400" alt="Dashboard Interface">
-      </div>
-      <div class="gallery-item">
-        <img src="/placeholder.svg?height=250&width=400" alt="Mobile Application">
-      </div>
-      <div class="gallery-item">
-        <img src="/placeholder.svg?height=250&width=400" alt="Analytics Dashboard">
       </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer id="contact">
-    <p>&copy; 2025 Innovate Pro. Crafting digital excellence for forward-thinking businesses.</p>
+    <p>&copy; 2025 Alex Johnson. Crafting exceptional iOS experiences with passion and precision.</p>
   </footer>
 
   <script>
+    
+    // Cursor trail effect
+    const cursorTrail = document.querySelector('.cursor-trail');
+    let mouseX = 0, mouseY = 0;
+    let trailX = 0, trailY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateCursor() {
+      const diffX = mouseX - trailX;
+      const diffY = mouseY - trailY;
+      
+      trailX += diffX * 0.1;
+      trailY += diffY * 0.1;
+      
+      cursorTrail.style.left = trailX + 'px';
+      cursorTrail.style.top = trailY + 'px';
+      
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const body = document.body;
+
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    body.setAttribute('data-theme', currentTheme);
+    themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    });
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
@@ -803,7 +1043,7 @@
       });
     });
 
-    // Intersection Observer for scroll animations
+    // Enhanced intersection observer for scroll animations
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -817,27 +1057,22 @@
       });
     }, observerOptions);
 
-    const animatedElements = document.querySelectorAll('.section-header h2, .section-header p, .feature-card, .gallery-item, .language-tile, .project-card');
+    const animatedElements = document.querySelectorAll('.section-header h2, .section-header p, .language-tile, .project-card, .about-text, .skill-tag');
     animatedElements.forEach(el => observer.observe(el));
 
     // Header background on scroll
     window.addEventListener('scroll', () => {
       const header = document.querySelector('header');
       if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.98)';
-        header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        header.style.background = 'var(--bg-card)';
+        header.style.boxShadow = '0 2px 20px var(--shadow-light)';
       } else {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
+        header.style.background = 'var(--bg-card)';
         header.style.boxShadow = 'none';
       }
     });
 
-    // Staggered animation for feature cards
-    const featureCards = document.querySelectorAll('.feature-card');
-    featureCards.forEach((card, index) => {
-      card.style.transitionDelay = `${index * 0.2}s`;
-    });
-
+    // Staggered animations
     const languageTiles = document.querySelectorAll('.language-tile');
     languageTiles.forEach((tile, index) => {
       tile.style.transitionDelay = `${index * 0.15}s`;
@@ -848,12 +1083,12 @@
       card.style.transitionDelay = `${index * 0.1}s`;
     });
 
-    // Staggered animation for gallery items
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    galleryItems.forEach((item, index) => {
-      item.style.transitionDelay = `${index * 0.15}s`;
+    const skillTags = document.querySelectorAll('.skill-tag');
+    skillTags.forEach((tag, index) => {
+      tag.style.transitionDelay = `${index * 0.1}s`;
     });
 
+    // Enhanced hero 3D mouse tracking
     const hero = document.querySelector('.hero');
     const heroContent = document.querySelector('.hero-content');
 
@@ -870,6 +1105,30 @@
 
     hero.addEventListener('mouseleave', () => {
       heroContent.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    });
+
+    // Parallax effect for floating elements
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const floatingElements = document.querySelectorAll('.floating-element');
+      
+      floatingElements.forEach((element, index) => {
+        const speed = 0.5 + (index * 0.2);
+        element.style.transform = `translateY(${scrolled * speed}px) rotateZ(${scrolled * 0.1}deg)`;
+      });
+    });
+
+    // Add hover effects to interactive elements
+    document.querySelectorAll('.language-tile, .project-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        cursorTrail.style.transform = 'scale(1.5)';
+        cursorTrail.style.background = 'radial-gradient(circle, rgba(102, 126, 234, 1) 0%, rgba(118, 75, 162, 0.6) 50%, transparent 70%)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        cursorTrail.style.transform = 'scale(1)';
+        cursorTrail.style.background = 'radial-gradient(circle, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.4) 50%, transparent 70%)';
+      });
     });
   </script>
 
